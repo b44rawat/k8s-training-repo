@@ -1,0 +1,12 @@
+K8s training:
+
+Webserver unable to reach frontend:
+port number of frontend has been changed to 3000.
+So, I had to change to port number in nginx.conf before building docker image for webserver.
+Similarly, used correct port number 3000 for frontend's deployment and service.
+Found this issue from kubectl logs of webserver which said it is unable to reach the frontend pod and kubect logs of frontend pod which said it is accepting connections at localhost:3000.
+All internal services will be ClusterIP except for the webserver which will be LoadBalancer for it to be publicly accessible.
+
+MySQL database wasnt getting created by default:
+I had to add ENV MYSQL_DATABASE attendancedb in mysql Dockerfile to create the database 'attendancedb', when mysql pod comes up.
+Found this issue when mysql-healthcheck was not able to find the database 'attendancedb' in mysql pod.
